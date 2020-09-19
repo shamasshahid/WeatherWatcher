@@ -1,0 +1,11 @@
+//
+//  WeatherWatcherConfig.xcconfig
+//  WeatherWatcher
+//
+//  Created by Shamas on 19/9/20.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+WEATHER_API_KEY =

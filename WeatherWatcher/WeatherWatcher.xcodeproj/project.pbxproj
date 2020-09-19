@@ -14,6 +14,20 @@
 		0620C7892514D9E10063A897 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0620C7882514D9E10063A897 /* Assets.xcassets */; };
 		0620C78C2514D9E10063A897 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0620C78A2514D9E10063A897 /* LaunchScreen.storyboard */; };
 		0620C7972514D9E10063A897 /* WeatherWatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7962514D9E10063A897 /* WeatherWatcherTests.swift */; };
+		0620C7C12514E2680063A897 /* WeatherResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7C02514E2680063A897 /* WeatherResponseModel.swift */; };
+		0620C7C72514E2840063A897 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7C62514E2840063A897 /* WeatherModel.swift */; };
+		0620C7CB2514E2A60063A897 /* CloudsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7CA2514E2A60063A897 /* CloudsModel.swift */; };
+		0620C7CF2514E2D30063A897 /* CoordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7CE2514E2D30063A897 /* CoordModel.swift */; };
+		0620C7D32514E30E0063A897 /* TemperatureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7D22514E30E0063A897 /* TemperatureModel.swift */; };
+		0620C7D72514E32B0063A897 /* SysModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7D62514E32B0063A897 /* SysModel.swift */; };
+		0620C7DB2514E3460063A897 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7DA2514E3460063A897 /* Weather.swift */; };
+		0620C7DF2514E3590063A897 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620C7DE2514E3590063A897 /* Wind.swift */; };
+		06490EDB251633C0002E191D /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06490EDA251633C0002E191D /* AppConfig.swift */; };
+		06490EEB25163B5A002E191D /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06490EEA25163B5A002E191D /* Routable.swift */; };
+		06490EEF25163B94002E191D /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06490EEE25163B94002E191D /* BaseRouter.swift */; };
+		06490EF325163C8A002E191D /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06490EF225163C8A002E191D /* WebService.swift */; };
+		06490EF725163CA8002E191D /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06490EF625163CA8002E191D /* WeatherService.swift */; };
+		06490EFB2516408F002E191D /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06490EFA2516408F002E191D /* DependencyProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +52,21 @@
 		0620C7922514D9E10063A897 /* WeatherWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0620C7962514D9E10063A897 /* WeatherWatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherWatcherTests.swift; sourceTree = "<group>"; };
 		0620C7982514D9E10063A897 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0620C7C02514E2680063A897 /* WeatherResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponseModel.swift; sourceTree = "<group>"; };
+		0620C7C62514E2840063A897 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		0620C7CA2514E2A60063A897 /* CloudsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudsModel.swift; sourceTree = "<group>"; };
+		0620C7CE2514E2D30063A897 /* CoordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordModel.swift; sourceTree = "<group>"; };
+		0620C7D22514E30E0063A897 /* TemperatureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureModel.swift; sourceTree = "<group>"; };
+		0620C7D62514E32B0063A897 /* SysModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SysModel.swift; sourceTree = "<group>"; };
+		0620C7DA2514E3460063A897 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		0620C7DE2514E3590063A897 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
+		06490EDA251633C0002E191D /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		06490EE12516343E002E191D /* WeatherWatcherConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WeatherWatcherConfig.xcconfig; sourceTree = "<group>"; };
+		06490EEA25163B5A002E191D /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		06490EEE25163B94002E191D /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		06490EF225163C8A002E191D /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		06490EF625163CA8002E191D /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		06490EFA2516408F002E191D /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,11 +108,13 @@
 		0620C77E2514D9DC0063A897 /* WeatherWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				06490EE025163413002E191D /* Configs */,
+				06490ED925163382002E191D /* AppConfigs */,
+				0620C7BF2514E0D90063A897 /* Models */,
+				0620C7B82514DFD20063A897 /* Network */,
+				0620C7B72514DFC40063A897 /* Resources */,
 				0620C7B42514DA1D0063A897 /* AppDelegates */,
 				0620C7832514D9DC0063A897 /* ViewController.swift */,
-				0620C7852514D9DC0063A897 /* Main.storyboard */,
-				0620C7882514D9E10063A897 /* Assets.xcassets */,
-				0620C78A2514D9E10063A897 /* LaunchScreen.storyboard */,
 				0620C78D2514D9E10063A897 /* Info.plist */,
 			);
 			path = WeatherWatcher;
@@ -105,6 +136,59 @@
 				0620C7812514D9DC0063A897 /* SceneDelegate.swift */,
 			);
 			path = AppDelegates;
+			sourceTree = "<group>";
+		};
+		0620C7B72514DFC40063A897 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0620C7852514D9DC0063A897 /* Main.storyboard */,
+				0620C7882514D9E10063A897 /* Assets.xcassets */,
+				0620C78A2514D9E10063A897 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0620C7B82514DFD20063A897 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				06490EEA25163B5A002E191D /* Routable.swift */,
+				06490EEE25163B94002E191D /* BaseRouter.swift */,
+				06490EF225163C8A002E191D /* WebService.swift */,
+				06490EF625163CA8002E191D /* WeatherService.swift */,
+				06490EFA2516408F002E191D /* DependencyProvider.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		0620C7BF2514E0D90063A897 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0620C7C02514E2680063A897 /* WeatherResponseModel.swift */,
+				0620C7C62514E2840063A897 /* WeatherModel.swift */,
+				0620C7CA2514E2A60063A897 /* CloudsModel.swift */,
+				0620C7CE2514E2D30063A897 /* CoordModel.swift */,
+				0620C7D22514E30E0063A897 /* TemperatureModel.swift */,
+				0620C7D62514E32B0063A897 /* SysModel.swift */,
+				0620C7DA2514E3460063A897 /* Weather.swift */,
+				0620C7DE2514E3590063A897 /* Wind.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		06490ED925163382002E191D /* AppConfigs */ = {
+			isa = PBXGroup;
+			children = (
+				06490EDA251633C0002E191D /* AppConfig.swift */,
+			);
+			path = AppConfigs;
+			sourceTree = "<group>";
+		};
+		06490EE025163413002E191D /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				06490EE12516343E002E191D /* WeatherWatcherConfig.xcconfig */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,9 +291,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06490EF725163CA8002E191D /* WeatherService.swift in Sources */,
+				0620C7CB2514E2A60063A897 /* CloudsModel.swift in Sources */,
+				06490EDB251633C0002E191D /* AppConfig.swift in Sources */,
+				06490EEB25163B5A002E191D /* Routable.swift in Sources */,
+				06490EF325163C8A002E191D /* WebService.swift in Sources */,
 				0620C7842514D9DC0063A897 /* ViewController.swift in Sources */,
 				0620C7802514D9DC0063A897 /* AppDelegate.swift in Sources */,
+				0620C7DB2514E3460063A897 /* Weather.swift in Sources */,
+				0620C7CF2514E2D30063A897 /* CoordModel.swift in Sources */,
+				0620C7D32514E30E0063A897 /* TemperatureModel.swift in Sources */,
+				0620C7C12514E2680063A897 /* WeatherResponseModel.swift in Sources */,
+				06490EFB2516408F002E191D /* DependencyProvider.swift in Sources */,
+				06490EEF25163B94002E191D /* BaseRouter.swift in Sources */,
+				0620C7C72514E2840063A897 /* WeatherModel.swift in Sources */,
 				0620C7822514D9DC0063A897 /* SceneDelegate.swift in Sources */,
+				0620C7D72514E32B0063A897 /* SysModel.swift in Sources */,
+				0620C7DF2514E3590063A897 /* Wind.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +351,7 @@
 /* Begin XCBuildConfiguration section */
 		0620C7A42514D9E10063A897 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06490EE12516343E002E191D /* WeatherWatcherConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -314,6 +413,7 @@
 		};
 		0620C7A52514D9E10063A897 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06490EE12516343E002E191D /* WeatherWatcherConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

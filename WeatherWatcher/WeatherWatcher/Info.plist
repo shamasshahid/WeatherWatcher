@@ -55,6 +55,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>weatherApiKey</key>
+	<string>$(WEATHER_API_KEY)</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -62,5 +64,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>openweathermap.org</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>
