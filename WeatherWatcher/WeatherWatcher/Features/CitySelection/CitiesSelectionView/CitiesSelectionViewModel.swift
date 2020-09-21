@@ -12,6 +12,14 @@ class CitiesSelectionViewModel {
     
     var dataUpdated: (() -> Void)?
     
+    var searchOffset = 0 {
+        didSet {
+            requestCities()
+        }
+    }
+    
+    var currentSearchString = ""
+    
     var allCities: [City] = [] {
         didSet {
             dataUpdated?()
@@ -19,19 +27,20 @@ class CitiesSelectionViewModel {
     }
     
     init() {
-        loadAllCities(searchString: "")
+        requestCities()
     }
     
     var citiesCount: Int {
         return allCities.count
     }
     
-    private func loadAllCities(searchString: String) {
-        allCities = DataStorage.shared.getAllCitiesMatching(matchingString: searchString)
+    private func requestCities() {
+        allCities.append(contentsOf: DataStorage.shared.getAllCitiesMatching(matchingString: currentSearchString, with: searchOffset))
     }
     
     func userUpdatedString(searchString: String) {
-        loadAllCities(searchString: searchString)
+        currentSearchString = searchString
+        requestCities()
     }
     
     private func cityObjectForIndex(index: Int) -> City? {
@@ -49,11 +58,20 @@ class CitiesSelectionViewModel {
         
     }
     
+    func updateSearchOffsetForIndex(index: Int) {
+        let newOffSet = (index + 1) / DataStorage.fetchBatchSize
+        if newOffSet > searchOffset {
+            searchOffset = newOffSet
+        }
+    }
+    
     func cityViewModelForIndex(index: Int) -> CitySelectionCellViewModel? {
         
         guard let city = cityObjectForIndex(index: index) else {
             return nil
         }
+        
+        updateSearchOffsetForIndex(index: index)
         
         return CitySelectionCellViewModel(object: city)
     }

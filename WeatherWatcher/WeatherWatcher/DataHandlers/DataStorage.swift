@@ -11,6 +11,7 @@ import CoreData
 class DataStorage {
     
     static let hasLoadedData = "hasLoadedData"
+    static let fetchBatchSize = 50
     
     static let shared = DataStorage()
     
@@ -95,7 +96,7 @@ class DataStorage {
         }
     }
     
-    func getAllCitiesMatching(matchingString: String) -> [City] {
+    func getAllCitiesMatching(matchingString: String, with offset: Int) -> [City] {
         var fetchedCities: [City] = []
         let cityFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
         cityFetch.sortDescriptors = [NSSortDescriptor(keyPath: \City.name, ascending: true)]
@@ -103,6 +104,9 @@ class DataStorage {
         if !matchingString.isEmpty {
             cityFetch.predicate = NSPredicate(format: "name CONTAINS[c] %@", matchingString)
         }
+        
+        cityFetch.fetchOffset = offset * DataStorage.fetchBatchSize
+        cityFetch.fetchLimit = DataStorage.fetchBatchSize
         
         do {
             fetchedCities = try persistentContainer.viewContext.fetch(cityFetch) as! [City]
@@ -138,7 +142,6 @@ class DataStorage {
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!))
             cityList = try JSONDecoder().decode(CityModelList.self, from: data)
-            print("count is \(cityList.count)")
         } catch {
             print(error)
         }
