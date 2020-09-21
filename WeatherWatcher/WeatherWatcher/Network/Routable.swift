@@ -29,6 +29,8 @@ enum HTTPType : String {
 /// Routable protocol which defines the requirements to determine the request
 protocol Routable {
     
+    var cityIDs: [Int32] { get set }
+    
     var methodType: HTTPType { get }
     var scheme: RoutableScheme { get }
     var baseURL: String { get }

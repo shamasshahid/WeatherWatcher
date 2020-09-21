@@ -15,8 +15,8 @@ struct BaseRouter: Routable {
         case appID = "APPID"
         case units
     }
-    
-    var cityIDs: String = "4163971,2147714,2174003"
+
+    var cityIDs: [Int32] = []
     
     var methodType: HTTPType {
         return .GET
@@ -37,7 +37,7 @@ struct BaseRouter: Routable {
     
     var queryItems: [URLQueryItem] {
         return [URLQueryItem(name: QueryItemsKeys.appID.rawValue, value: AppConfig.WEATHER_API_KEY),
-                URLQueryItem(name: QueryItemsKeys.id.rawValue, value: cityIDs),
+                URLQueryItem(name: QueryItemsKeys.id.rawValue, value: cityIDs.map(String.init).joined(separator: ",")),
                 URLQueryItem(name: QueryItemsKeys.units.rawValue, value: "metric")]
     }
     
