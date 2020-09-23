@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Clouds
-//todo:
+
 struct Clouds: Codable {
     let all: Int
 }

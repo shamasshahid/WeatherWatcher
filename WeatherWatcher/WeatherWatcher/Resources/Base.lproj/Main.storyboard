@@ -67,6 +67,7 @@
                         <outlet property="activityIndicationLabel" destination="lkg-FP-lXB" id="k8V-Cc-XhV"/>
                         <outlet property="activityIndicator" destination="SBT-uI-FrG" id="cXS-it-qVD"/>
                         <outlet property="laodingView" destination="OS6-Hu-wxA" id="EXo-qL-PGG"/>
+                        <segue destination="OPn-Ch-HHb" kind="show" identifier="weatherDetailSegueIdenifier" id="whK-wr-jXS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFr-or-dru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -74,13 +75,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="SBT-uI-FrG">
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="SBT-uI-FrG">
                             <rect key="frame" x="101.5" y="45.5" width="37" height="37"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting up App Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkg-FP-lXB">
                             <rect key="frame" x="43.5" y="87" width="153.5" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -95,6 +96,72 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1110.144927536232" y="45.535714285714285"/>
+        </scene>
+        <!--Weather Detail View Controller-->
+        <scene sceneID="Sbk-9l-9Ns">
+            <objects>
+                <viewController id="OPn-Ch-HHb" customClass="WeatherDetailViewController" customModule="WeatherWatcher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XaQ-7c-KFQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q9H-J2-9VW">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeatherDetailTableViewCellIdentifier" id="mTU-Ea-DnQ" customClass="WeatherDetailTableViewCell" customModule="WeatherWatcher" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mTU-Ea-DnQ" id="PtO-4Q-Gxx">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJw-s8-j6X">
+                                                    <rect key="frame" x="20" y="11.5" width="33" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHT-P7-9Fh">
+                                                    <rect key="frame" x="352" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UJw-s8-j6X" firstAttribute="leading" secondItem="PtO-4Q-Gxx" secondAttribute="leadingMargin" id="BBv-s4-fIe"/>
+                                                <constraint firstItem="XHT-P7-9Fh" firstAttribute="trailing" secondItem="PtO-4Q-Gxx" secondAttribute="trailingMargin" id="Dl3-Hg-HsS"/>
+                                                <constraint firstItem="XHT-P7-9Fh" firstAttribute="centerY" secondItem="PtO-4Q-Gxx" secondAttribute="centerY" id="FYV-wS-j3N"/>
+                                                <constraint firstItem="XHT-P7-9Fh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UJw-s8-j6X" secondAttribute="trailing" constant="10" id="SRq-GX-fUQ"/>
+                                                <constraint firstItem="UJw-s8-j6X" firstAttribute="centerY" secondItem="PtO-4Q-Gxx" secondAttribute="centerY" id="Xke-3X-HYN"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="UJw-s8-j6X" id="xeG-tS-LWs"/>
+                                            <outlet property="valueLabel" destination="XHT-P7-9Fh" id="XJi-1j-rbz"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o5s-qJ-uNK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Q9H-J2-9VW" secondAttribute="bottom" id="8X5-7o-1NC"/>
+                            <constraint firstItem="Q9H-J2-9VW" firstAttribute="trailing" secondItem="o5s-qJ-uNK" secondAttribute="trailing" id="Ggf-5x-MxB"/>
+                            <constraint firstItem="Q9H-J2-9VW" firstAttribute="leading" secondItem="o5s-qJ-uNK" secondAttribute="leading" id="rx3-U8-qdf"/>
+                            <constraint firstItem="Q9H-J2-9VW" firstAttribute="top" secondItem="o5s-qJ-uNK" secondAttribute="top" id="sqB-tx-u02"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZhL-FF-soG"/>
+                    <connections>
+                        <outlet property="tableview" destination="Q9H-J2-9VW" id="Uow-aN-GRX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IbC-tj-KKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2281.1594202898555" y="284.59821428571428"/>
         </scene>
         <!--Cities Selection View Controller-->
         <scene sceneID="cCB-se-kpq">
@@ -168,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXX-RX-zOm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2048" y="46"/>
+            <point key="canvasLocation" x="2290" y="-372"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aey-kb-gza">

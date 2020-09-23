@@ -15,13 +15,15 @@ enum PreLoadStatus {
 
 class WeatherListViewModel {
     
-    private var router: Routable
     private let service: WebService
-    private let storage: DataStorage
+    private var storage: Storage
+    
+    var activityLabelMessage: String = ""
+    var onWeatherDataFetched: (() -> Void)?
+    var onLoadingStatusChagned: ((Bool) -> Void)?
     
     var preLoadStatus: PreLoadStatus = .notStarted {
         didSet {
-            print("new state is \(preLoadStatus)")
             if preLoadStatus == .inProgress {
                 activityLabelMessage = "Setting up app data"
                 shouldShowProgressIndicator = true
@@ -37,9 +39,7 @@ class WeatherListViewModel {
             onLoadingStatusChagned?(shouldShowProgressIndicator)
         }
     }
-    var activityLabelMessage: String = ""
-    var onWeatherDataFetched: (() -> Void)?
-    var onLoadingStatusChagned: ((Bool) -> Void)?
+    
     
     private var weatherList: [WeatherModel] = [] {
         didSet {
@@ -51,13 +51,12 @@ class WeatherListViewModel {
         return weatherList.count
     }
     
-    init(router: Routable, service: WebService, storage: DataStorage) {
-        self.router = router
+    init(service: WebService, storage: Storage) {
         self.service = service
         self.storage = storage
         
         setupStorage()
-        storage.prepareForUse()
+        self.storage.start()
     }
     
     private func setupStorage() {
@@ -72,7 +71,7 @@ class WeatherListViewModel {
     
     func fetchResults() {
         
-        router.cityIDs = storage.getIDsForSelectedCities()
+        let router = WeatherListRouter.fetchCitiesWeather(storage.getIDsForSelectedCities())
         service.fetch(urlRequest: router) { [weak self] (result) in
             switch result {
             case .success(let response):
@@ -91,12 +90,24 @@ class WeatherListViewModel {
         return weatherList[index]
     }
     
-    func getViewModelForIndex(index: Int) -> CityWeatherTVCViewModel? {
+    func getCellViewModelForIndex(index: Int) -> CityWeatherTVCViewModel? {
         guard let model = weatherModelForIndex(index: index) else {
             return nil
         }
         
         return CityWeatherTVCViewModel(model: model)
+    }
+    
+    func getDetailViewModel(index: Int) -> WeatherDetailViewModel? {
+        guard let model = weatherModelForIndex(index: index) else {
+            return nil
+        }
+        
+        return WeatherDetailViewModel(weatherModel: model)
+    }
+    
+    func getCitySelectionViewModel() -> CitiesSelectionViewModel {
+        return CitiesSelectionViewModel(storage: storage)
     }
     
 }

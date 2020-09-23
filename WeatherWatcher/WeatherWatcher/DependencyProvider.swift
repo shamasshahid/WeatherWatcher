@@ -9,18 +9,19 @@ import Foundation
 
 /// Protocol which defines the required service and routable
 protocol Dependencies {
-    func getService() -> WebService
-    func getRoutable() -> Routable
+    static func getService() -> WebService
+    
+    static func getStorage() -> Storage
 }
 
 /// Implementation for ConverterDependencies which returns WebService, and Routable
 class DependencyProvider: Dependencies {
     
-    func getService() -> WebService {
+    static func getService() -> WebService {
         return WeatherService()
     }
-
-    func getRoutable() -> Routable {
-        return BaseRouter()
+    
+    static func getStorage() -> Storage {
+        return DataStorage()
     }
 }

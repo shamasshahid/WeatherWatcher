@@ -8,7 +8,6 @@
 import Foundation
 
 // MARK: - Coord
-// todo
 struct Coord: Codable {
     let lon, lat: Double
 }

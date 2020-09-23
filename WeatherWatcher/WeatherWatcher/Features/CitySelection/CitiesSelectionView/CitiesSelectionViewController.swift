@@ -34,6 +34,9 @@ class CitiesSelectionViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        if let presController = presentationController {
+            presController.delegate?.presentationControllerDidDismiss?(presController)
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -63,12 +66,18 @@ extension CitiesSelectionViewController: UITableViewDataSource, UITableViewDeleg
         
         if let cityCell = cell as? CitySelectionTableViewCell {
             cityCell.viewModel = viewModel.cityViewModelForIndex(index: indexPath.row)
-            if cityCell.viewModel.isSelected {
-                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-            }
+            setRowSelectionFor(indexPath: indexPath, isSelected: cityCell.viewModel.isSelected)
         }
         
         return cell
+    }
+    
+    func setRowSelectionFor(indexPath: IndexPath, isSelected: Bool) {
+        if isSelected {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

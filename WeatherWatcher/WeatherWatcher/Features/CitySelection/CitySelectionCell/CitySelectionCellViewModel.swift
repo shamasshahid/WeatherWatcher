@@ -9,14 +9,14 @@ import Foundation
 
 class CitySelectionCellViewModel {
     
-    let cityObject: City
+    let cityObject: CityStorageModel
     
-    init(object: City) {
+    init(object: CityStorageModel) {
         cityObject = object
     }
     
     var cityName: String {
-        return String(format: "%@ - %@", cityObject.name ?? "", cityObject.country ?? "")
+        return String(format: "%@ - %@", cityObject.name, cityObject.country)
     }
     
     var isSelected: Bool {

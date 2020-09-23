@@ -8,23 +8,30 @@
 import Foundation
 import CoreData
 
-class DataStorage {
+protocol Storage {
     
-    static let hasLoadedData = "hasLoadedData"
+    var fetchBatchSize: Int {get set}
+    var onPreloadStarted: (() -> Void)? { get set }
+    var onPreloadFinished: (() -> Void)? { get set }
+    var preSetCityIDs: [Int32] { get set }
+    func start()
+    func getAllCitiesMatching(matchingString: String, with offset: Int) -> [CityStorageModel]
+    func getIDsForSelectedCities() -> [Int32]
+    func updateCityModelSelection(model: CityStorageModel)
+}
+
+class DataStorage: Storage {
     
-    static let shared = DataStorage()
+    var preSetCityIDs: [Int32] = [2158177, 2147714, 2174003]
+    
+    private static let hasLoadedData = "hasLoadedData"
+    
+    var fetchBatchSize = 50
     
     var onPreloadStarted: (() -> Void)?
     var onPreloadFinished: (() -> Void)?
     
-    init() {
-    }
-    
-    func prepareForUse() {
-        preloadData()
-    }
-    
-    var hasPreLoadedData: Bool {
+    private var hasPreLoadedData: Bool {
         get {
             return UserDefaults.standard.bool(forKey: DataStorage.hasLoadedData)
         }
@@ -33,9 +40,8 @@ class DataStorage {
         }
     }
     
-    
-    
-    lazy var persistentContainer: NSPersistentContainer = {
+    // todo: remove default comments
+    private lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -61,6 +67,10 @@ class DataStorage {
         })
         return container
     }()
+    
+    func start() {
+        preloadData()
+    }
 
     private func preloadData() {
         
@@ -72,13 +82,8 @@ class DataStorage {
             bgContext.perform {
                 for aCityModel in cityList {
                     let cityCoreDataObject = City(context: bgContext)
-                    cityCoreDataObject.id = Int32(aCityModel.id)
-                    cityCoreDataObject.name = aCityModel.name
-                    cityCoreDataObject.country = aCityModel.country
-                    cityCoreDataObject.state = aCityModel.state
-                    if aCityModel.id == 2158177 || aCityModel.id == 2147714 || aCityModel.id == 2174003 {
-                        cityCoreDataObject.isSelected = true
-                    }
+                    cityCoreDataObject.populateFromModel(model: aCityModel)
+                    cityCoreDataObject.isSelected = self.preSetCityIDs.contains(cityCoreDataObject.id)
                 }
                 
                 do {
@@ -95,14 +100,17 @@ class DataStorage {
         }
     }
     
-    func getAllCitiesMatching(matchingString: String) -> [City] {
+    func getAllCitiesMatching(matchingString: String, with offset: Int) -> [CityStorageModel] {
         var fetchedCities: [City] = []
-        let cityFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+        let cityFetch = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: City.self))
         cityFetch.sortDescriptors = [NSSortDescriptor(keyPath: \City.name, ascending: true)]
         
         if !matchingString.isEmpty {
             cityFetch.predicate = NSPredicate(format: "name CONTAINS[c] %@", matchingString)
         }
+        
+        cityFetch.fetchOffset = offset * fetchBatchSize
+        cityFetch.fetchLimit = fetchBatchSize
         
         do {
             fetchedCities = try persistentContainer.viewContext.fetch(cityFetch) as! [City]
@@ -110,12 +118,30 @@ class DataStorage {
             print("Failed to fetch cities: \(error)")
             
         }
-        return fetchedCities
+        
+        print("matching cities are \(fetchedCities.count)")
+        
+        return fetchedCities.map({ $0.getCityStorageModel() })
+    }
+    
+    func updateCityModelSelection(model: CityStorageModel) {
+        
+        let cityFetch = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: City.self))
+        cityFetch.predicate = NSPredicate(format: "id == %d", model.id)
+        do {
+            let fetchedCity = try persistentContainer.viewContext.fetch(cityFetch) as! [City]
+            if let first = fetchedCity.first {
+                first.isSelected = model.isSelected
+                try? first.managedObjectContext?.save()
+            }
+        } catch {
+            print("Failed to fetch/update city: \(error)")
+        }
     }
     
     func getIDsForSelectedCities() -> [Int32] {
         var fetchedCities: [City] = []
-        let cityFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+        let cityFetch = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: City.self))
         cityFetch.sortDescriptors = [NSSortDescriptor(keyPath: \City.name, ascending: true)]
         
         cityFetch.predicate = NSPredicate(format: "isSelected == true")
@@ -138,7 +164,6 @@ class DataStorage {
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!))
             cityList = try JSONDecoder().decode(CityModelList.self, from: data)
-            print("count is \(cityList.count)")
         } catch {
             print(error)
         }
