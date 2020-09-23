@@ -9,9 +9,18 @@ import Foundation
 
 typealias CityModelList = [CityModel]
 
-struct CityModel: Codable {
+class CityModel: Codable {
     var id: Int
     var name: String
     var state: String
     var country: String
+    var coord: Coord
+    
+    init(id: Int, name: String, state: String, country: String, coord: Coord) {
+        self.id = id
+        self.name = name
+        self.state = state
+        self.country = country
+        self.coord = coord
+    }
 }

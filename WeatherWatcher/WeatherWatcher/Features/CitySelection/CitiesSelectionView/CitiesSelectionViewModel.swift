@@ -11,22 +11,23 @@ import CoreData
 class CitiesSelectionViewModel {
     
     var dataUpdated: (() -> Void)?
+    let storage: Storage
+    var currentSearchString = ""
     
-    var searchOffset = 0 {
+    var dataFetchOffset = 0 {
         didSet {
             requestCities()
         }
     }
     
-    var currentSearchString = ""
-    
-    var allCities: [City] = [] {
+    var allCities: [CityStorageModel] = [] {
         didSet {
             dataUpdated?()
         }
     }
     
-    init() {
+    init(storage: Storage) {
+        self.storage = storage
         requestCities()
     }
     
@@ -35,15 +36,16 @@ class CitiesSelectionViewModel {
     }
     
     private func requestCities() {
-        allCities.append(contentsOf: DataStorage.shared.getAllCitiesMatching(matchingString: currentSearchString, with: searchOffset))
+        allCities.append(contentsOf: storage.getAllCitiesMatching(matchingString: currentSearchString, with: dataFetchOffset))
     }
     
     func userUpdatedString(searchString: String) {
         currentSearchString = searchString
+        allCities.removeAll()
         requestCities()
     }
     
-    private func cityObjectForIndex(index: Int) -> City? {
+    private func cityObjectForIndex(index: Int) -> CityStorageModel? {
         guard index >= 0 && index < allCities.count else {
             return nil
         }
@@ -53,15 +55,14 @@ class CitiesSelectionViewModel {
     func selectionChangedFor(isSelected: Bool, index: Int) {
         if let city = cityObjectForIndex(index: index) {
             city.isSelected = isSelected
-            try? city.managedObjectContext?.save()
+            storage.updateCityModelSelection(model: city)
         }
-        
     }
     
     func updateSearchOffsetForIndex(index: Int) {
-        let newOffSet = (index + 1) / DataStorage.fetchBatchSize
-        if newOffSet > searchOffset {
-            searchOffset = newOffSet
+        let newOffSet = (index + 1) / storage.fetchBatchSize
+        if newOffSet > dataFetchOffset {
+            dataFetchOffset = newOffSet
         }
     }
     

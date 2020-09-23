@@ -20,8 +20,8 @@ extension City {
     @NSManaged public var name: String?
     @NSManaged public var state: String?
     @NSManaged public var country: String?
-    @NSManaged public var longitude: Float
-    @NSManaged public var latitude: Float
+    @NSManaged public var longitude: Double
+    @NSManaged public var latitude: Double
     @NSManaged public var isSelected: Bool
 }
 

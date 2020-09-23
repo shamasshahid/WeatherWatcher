@@ -20,7 +20,7 @@ class CityWeatherTVCViewModel {
     }
     
     var temperature: String {
-        return "\(weatherModel.main.temp) °C"
+        return weatherModel.main.temp.getFormattedStringWithMetric()
     }
     
 }

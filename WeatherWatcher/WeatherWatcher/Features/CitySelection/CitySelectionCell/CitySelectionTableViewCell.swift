@@ -18,11 +18,6 @@ class CitySelectionTableViewCell: UITableViewCell {
             updateView()
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     func updateView() {
         cityLabel.text = viewModel.cityName
