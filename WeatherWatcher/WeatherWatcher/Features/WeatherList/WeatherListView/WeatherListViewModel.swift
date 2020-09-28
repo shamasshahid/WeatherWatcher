@@ -40,14 +40,13 @@ class WeatherListViewModel {
         }
     }
     
-    
     private var weatherList: [WeatherModel] = [] {
         didSet {
             onWeatherDataFetched?()
         }
     }
     
-    var weatherCount: Int {
+    var weatherListCount: Int {
         return weatherList.count
     }
     
