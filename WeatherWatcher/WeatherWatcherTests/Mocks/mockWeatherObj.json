@@ -1,0 +1,39 @@
+{
+      "coord": {
+        "lon": 153.03,
+        "lat": -27.47
+      },
+      "sys": {
+        "country": "AU",
+        "timezone": 36000,
+        "sunrise": 1600803383,
+        "sunset": 1600847053
+      },
+      "weather": [
+        {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04n"
+        }
+      ],
+      "main": {
+        "temp": 21.19,
+        "feels_like": 22.1,
+        "temp_min": 20.56,
+        "temp_max": 22.22,
+        "pressure": 1013,
+        "humidity": 94
+      },
+      "visibility": 10000,
+      "wind": {
+        "speed": 4.1,
+        "deg": 240
+      },
+      "clouds": {
+        "all": 92
+      },
+      "dt": 1600863039,
+      "id": 2174003,
+      "name": "Brisbane"
+    }
